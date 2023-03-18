@@ -1,21 +1,23 @@
 import { assert, expect, test } from "vitest";
 
-// Edit an assertion and save to see HMR in action
-
-test("Math.sqrt()", () => {
-  expect(Math.sqrt(4)).toBe(2);
-  expect(Math.sqrt(144)).toBe(12);
-  expect(Math.sqrt(2)).toBe(Math.SQRT2);
-});
-
-test("JSON", () => {
-  const input = {
-    foo: "hello",
-    bar: "world",
+test("Sample should work great xD", () => {
+  const target = {
+    message1: "hello",
+    message2: "everyone",
   };
 
-  const output = JSON.stringify(input);
+  const handler3 = {
+    get(target, prop, receiver) {
+      if (prop === "message2") {
+        return "world";
+      }
+      //   @ts-ignore
+      return Reflect.get(...arguments);
+    },
+  };
 
-  expect(output).eq('{"foo":"hello","bar":"world"}');
-  assert.deepEqual(JSON.parse(output), input, "matches original");
+  const proxy3 = new Proxy(target, handler3);
+
+  console.log(proxy3.message1); // hello
+  console.log(proxy3.message2); // world
 });
