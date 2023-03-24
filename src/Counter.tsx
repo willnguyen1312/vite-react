@@ -1,3 +1,5 @@
-export function Counter(props: { numb: number }) {
-  return null;
+function SampleComponent(
+  OtherComponent: React.ReactNode & { onClick: () => void }
+) {
+  return <OtherComponent />;
 }
